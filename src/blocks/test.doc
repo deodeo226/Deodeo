@@ -1,1 +1,4 @@
 hehehehehehe
+ git add . 
+ git commit -m tên nhánh 
+ git push origin tên nhánh
