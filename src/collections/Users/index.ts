@@ -1,7 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { authenticated } from '../../access/authenticated'
 import { checkvalueuser } from '@/hooks/checkvalueuser';
-// import { lichlamviec } from '@/fields/look';
 import { ApiError } from 'next/dist/server/api-utils';
 export const Users: CollectionConfig = {
   slug: 'users',

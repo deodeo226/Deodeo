@@ -1,4 +1,4 @@
 hehehehehehe
  git add . 
- git commit -m tên nhánh 
- git push origin tên nhánh
+ git commit -m tên nhánh "comment"
+ git push origin tên nhánh 

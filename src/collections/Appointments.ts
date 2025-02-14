@@ -18,17 +18,6 @@ fields:[
       relationTo: 'Patients',  // Tham chiếu tới collection 'patients'
       required: true,
     },
-      // {
-      //   name: 'bacsi',
-      //   label: 'Chọn bác sĩ',
-      //   type: 'relationship',
-      //   relationTo: 'users',
-      //   filterOptions: ({ user }) => {
-      //     return {
-      //       chucvu: { equals: 'bacsi' } ,
-      //       tinhtranglamviec:{not_equals:'nghiviec'}
-      //     };
-      // },},
       {
         name: 'ngaykham',
         label: 'Ngày khám',
@@ -86,7 +75,7 @@ fields:[
       beforeChange: [
         async ({ data, operation, req }) => {
           if (operation === 'create' || operation === 'update') {
-            const { ngaykham, giokham } = data;   //bascsi, 
+            const { ngaykham, giokham } = data;    
     
             // Kiểm tra ngày khám không được ở quá khứ
             const today = new Date();
@@ -101,7 +90,6 @@ fields:[
             const existingAppointments = await req.payload.find({
               collection: 'appointments',  
               where: {
-                // bacsi: { equals: bacsi },
                 ngaykham: { equals: ngaykham },
                 giokham: { equals: giokham },
               },

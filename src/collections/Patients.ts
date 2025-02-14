@@ -1,8 +1,12 @@
 import { Label } from "@radix-ui/react-select";
 import { CollectionConfig } from "payload";
-import { lichkham} from "@/fields/look";
 import { checkvalue } from "@/hooks/checkvaluepatients";
+import { lichkham,ylenh } from "@/fields/relations";
 import { APIError } from "payload";
+import { relationship } from "node_modules/payload/dist/fields/validations";
+console.log("Lịch khám:", lichkham);
+console.log("Y Lệnh:", ylenh);
+
 export const Patients: CollectionConfig = {
     slug:'Patients',
     labels: {
@@ -133,11 +137,17 @@ export const Patients: CollectionConfig = {
         type: 'tabs',
         tabs:[
         {
-            fields:[lichkham ], 
-            label: 'LỊCH KHÁM',    
-        }
+            name: 'lichhen', 
+            label: 'LỊCH HẸN',
+            fields:[lichkham],    
+        },
+            {
+                name: 'ylenh',
+                label: 'Y LỆNH',  
+                fields: [ylenh],  
+            }
         ]
-      }
+      },
     ],
     hooks: {
         beforeValidate: [

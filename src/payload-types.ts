@@ -28,11 +28,7 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    Patients: {
-      benhan: 'appointments';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -745,10 +741,12 @@ export interface Patient {
   diachi?: string | null;
   sdt: string;
   email: string;
-  benhan?: {
-    docs?: (string | Appointment)[] | null;
-    hasNextPage?: boolean | null;
-  } | null;
+  lichhen?: {
+    lichkham?: (string | Appointment)[] | null;
+  };
+  ylenh?: {
+    ylenh?: (string | Medicalorder)[] | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1413,7 +1411,16 @@ export interface PatientsSelect<T extends boolean = true> {
   diachi?: T;
   sdt?: T;
   email?: T;
-  benhan?: T;
+  lichhen?:
+    | T
+    | {
+        lichkham?: T;
+      };
+  ylenh?:
+    | T
+    | {
+        ylenh?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

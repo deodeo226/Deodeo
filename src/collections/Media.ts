@@ -87,21 +87,31 @@ export const Media: CollectionConfig = {
   },
   hooks: {
     beforeChange: [
-      async ({ data, req }) => {
-        if (data && data.filename) {
-          const existingMedia = await req.payload.find({
-            collection: 'media',
-            where: {
-              originalFilename: { equals: data.originalFilename },
-            },
-          });
-  
-          if (existingMedia.totalDocs > 0) {
-            throw new APIError('Ảnh này đã tồn tại trong hệ thống! Vui lòng chọn ảnh khác.', 400);
+      async ({ data, req, operation }) => {
+        if (operation === 'create' || operation === 'update') {
+          if (data && data.originalFilename) {
+            const existingMedia = await req.payload.find({
+              collection: 'media',
+              where: {
+                originalFilename: { equals: data.originalFilename },
+              },
+            });
+    
+            // Nếu ảnh đã tồn tại và không phải ảnh hiện tại thì báo lỗi
+            if (existingMedia.totalDocs > 0) {
+              const isSameImage = existingMedia.docs.some(
+                (doc) => doc.id === data.id // Kiểm tra xem ảnh này có phải ảnh hiện tại không
+              );
+    
+              if (!isSameImage) {
+                throw new APIError('Ảnh này đã tồn tại trong hệ thống! Vui lòng chọn ảnh khác.', 400);
+              }
+            }
           }
         }
       },
     ],
+    
   },
   
 }
